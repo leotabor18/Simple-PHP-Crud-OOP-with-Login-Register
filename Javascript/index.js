@@ -95,7 +95,7 @@ btn_register.addEventListener('click', event =>{
     return;
   }
 
-  form_register.action = './modal/register.php';
+  form_register.action = './Modal/register.php';
   
 });
 
@@ -122,7 +122,7 @@ btn_login.addEventListener('click', event =>{
       event.preventDefault();
       return;
     }
-    form_login.action = './modal/login.php';
+    form_login.action = './Modal/login.php';
 
 });
 //
