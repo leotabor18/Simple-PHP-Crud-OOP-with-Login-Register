@@ -8,8 +8,13 @@
         protected $connect;
         
         //connect to database
-        public function _connect()
+        public function _connect($encoded)
         {
+            $decoded = json_decode($encoded);
+            $this->host = $decoded->{'host'};
+            $this->username = $decoded->{'username'};
+            $this->pass = $decoded->{'password'};
+            $this->dbase = $decoded->{'dbase'};
             try 
             {
                 $this->connect = new mysqli($this->host, $this->username , 
