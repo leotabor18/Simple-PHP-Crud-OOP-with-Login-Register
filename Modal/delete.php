@@ -1,4 +1,5 @@
 <?php 
+//delete action page
 include './crud.php';
 
 if(isset($_GET['id'])){

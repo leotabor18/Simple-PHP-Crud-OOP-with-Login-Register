@@ -1,4 +1,5 @@
 <?php 
+//login action page
 include './crud.php';
 
 if(isset($_POST['login'])){

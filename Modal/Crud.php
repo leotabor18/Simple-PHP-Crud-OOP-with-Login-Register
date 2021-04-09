@@ -7,6 +7,7 @@
         protected $pass = '';
         protected $connect;
         
+        //connect to database
         public function _connect()
         {
             try 
@@ -19,7 +20,7 @@
             }
             return $this->connect;
         }
-      
+        //create and store data to database
         public function _create($id)
         {
             if(isset($_POST['submit']))
@@ -40,6 +41,7 @@
                 
             }
         }
+        //read data from the database
         public function _read($id)
         {
             $query = "SELECT * FROM thoughts WHERE user_id = '$id' ORDER BY id DESC";
@@ -59,6 +61,7 @@
                 return $data;
             }
         }
+        //update data the return reload parent div
         public function _update($id)
         {
            if(isset($_POST['update']))
@@ -78,6 +81,7 @@
                 }
            }
         }
+        //delete data then return reload parent div
         public function _delete($id, $user_id)
         {
             self::_connect();
@@ -91,6 +95,7 @@
             }
         }
     }
+    //class for login and register, extend crud class to use connect function
     class LoginRegister extends Crud
     {
         public function _login($login_data){
@@ -119,6 +124,7 @@
             }
 
         }
+        //register user account
         public function _register($register_data){
             $decoded = json_decode($register_data);
             $fullname = $decoded->{'fullname'};
@@ -129,7 +135,7 @@
             $stmt->bind_param('s', $username);
             $stmt->execute();
             $stmt->store_result();
-            $stmt->bind_result($db_username); // get variables from result.
+            $stmt->bind_result($db_username); 
             $stmt->fetch();
             if($stmt->num_rows == 1){
                 return header("Location: ./index.php?error=username&name=$fullname");

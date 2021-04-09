@@ -1,7 +1,22 @@
-const form_main = document.querySelector('.form-main');
+
+//navbar background color will turn into black when scroll up
+$(function () {
+    $(document).scroll(function () {
+        var $nav = $(".navbar");
+        var $float = $(".float-form");
+        $nav_scrolled = $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
+        if($(this).scrollTop() > 240){
+            $float.removeClass('form-floating');
+        }else{
+            $float.addClass('form-floating');
+        }
+      });
+  });
+
 const btn_submit = document.getElementById('btn-submit');
 const btn_update = document.getElementById('btn-update');
 
+//validation for .form-main
 btn_submit.addEventListener('click', event =>{ 
    const name = document.getElementById('name');
    const thoughts = document.getElementById('thoughts');
@@ -23,6 +38,7 @@ btn_submit.addEventListener('click', event =>{
     }
     
 });
+//validation for update form
 if(btn_update != null){
     btn_update.addEventListener('click', event=>{
         
@@ -48,6 +64,7 @@ if(btn_update != null){
 }
 const btn_delete = document.getElementsByClassName('btn-delete');
 
+//if button delete is click, link the form to delete.php
 for(let i = 0; i < btn_delete.length; i++){
   btn_delete[i].addEventListener('click', event =>{
   event.preventDefault();
@@ -56,15 +73,3 @@ for(let i = 0; i < btn_delete.length; i++){
 });
 }
 
-$(function () {
-    $(document).scroll(function () {
-        var $nav = $(".navbar");
-        var $float = $(".float-form");
-        $nav_scrolled = $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
-        if($(this).scrollTop() > 240){
-            $float.removeClass('form-floating');
-        }else{
-            $float.addClass('form-floating');
-        }
-      });
-  });

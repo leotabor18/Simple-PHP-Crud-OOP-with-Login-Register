@@ -1,5 +1,5 @@
 <?php 
-
+//register action page
  include './crud.php';
 
  if(isset($_POST['register'])){

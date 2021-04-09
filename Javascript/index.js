@@ -1,3 +1,5 @@
+//this is for index.php javascript
+
 const form_register = document.querySelector('.form-register');
 const form_login = document.querySelector('.form-login');
 const btn_register = document.querySelector('#register');
@@ -13,6 +15,7 @@ const btn_change = document.getElementsByClassName('btn-change');
 close_modal(btn_close);
 close_modal(btn_change);
 
+//reset all form when close button from modal is click
 function close_modal(btn_click){
   for(let i = 0; i < btn_click.length; i++){
     btn_click[i].addEventListener('click', () =>{
@@ -27,12 +30,14 @@ function close_modal(btn_click){
     });
   }
 }
+//remove red border function
 function remove_border(){
   for(let i = 0; i < input_class.length; i++ ){
     input_class[i].classList.remove('border-danger','shadow-none');
   }
   success_tag.style.display='none';
 }
+//validation for register form if success, add action link to form-register
 btn_register.addEventListener('click', event =>{
   const fullname_id = document.querySelector('#fullname');
   const username_id = document.querySelector('#username');
@@ -93,6 +98,8 @@ btn_register.addEventListener('click', event =>{
   form_register.action = './modal/register.php';
   
 });
+
+//validation for login form if success, add action link to login-register
 btn_login.addEventListener('click', event =>{
     modal[0].style.display = 'none';
     const username = document.querySelector('#name');
