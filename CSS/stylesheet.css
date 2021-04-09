@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap');
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Balsamiq Sans', cursive !important;
+}
+body{
+    height: 100vh;
+    width: 100vw;
+    background-image: linear-gradient( 
+        115deg
+        , rgba(216, 216, 216, 0), rgba(216, 216, 216, 0.1)) ,  url('../images/bg_image_2.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+/* Navbar */
+nav{
+    position: fixed !important;
+    top: 0;
+    width: 100%;
+    background-color: rgba(105, 105, 105, 0.4);
+    text-shadow:1px 1px rgba(5, 5, 5, 0.7);
+}
+nav li a, nav li{
+    color: rgb(238, 238, 238) !important;
+    cursor: pointer;
+}
+
+
+nav .navbar-toggler{
+    border-color: white !important;
+ }
+.navbar.scrolled {
+background-color: rgb(34, 34, 34) !important;
+transition: background-color 200ms linear;
+}
+
+.navbar.scrolled .nav-link {
+color:#555;
+}
+ /* Main.container-fluid index */
+ main.container-fluid{
+    height: 80vh;
+    letter-spacing: 1px;
+    text-align: center;
+    color: rgba(255, 255, 255,0.9);
+    text-shadow: 1px 1px #080808;
+ }
+.main{
+    height: 80vh;
+    margin-top: 70px;
+ }
+ main button.btn{
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 15px;
+    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.8);
+ }
+ #label-thoughts{
+    opacity: 0.6;
+ }
+ main button.btn:hover{
+     transform: scale(1.01);
+ }
+ .fa, .far, .fas {
+    font-family: "Font Awesome 5 Free" !important;
+}
+ footer{
+     height: 15vh;
+ }
+ footer small{
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255,0.9);
+    text-shadow: 1px 1px #080808;
+    font-size: 10px;
+    text-align: end;
+    text-transform: capitalize;
+ }
+
+ /* Modal */
+.modal-content{
+    background-color:rgba(255, 255, 255, 0.9) !important;
+
+ }
+.error{
+    color: rgb(255, 36, 36);
+}
+.btns-form{
+    width: 100%;
+    text-align: end;
+}
+ @media (max-width: 500px){
+   
+ }
