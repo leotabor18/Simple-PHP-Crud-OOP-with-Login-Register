@@ -6,7 +6,7 @@
         header("Location: /index.php");
     }
  ?>
-<!doctype html>
+<!-- <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -110,8 +110,9 @@
             </form>
             </div>
         </div>
-    </div>
-    <?php include './Modal/error-display.php';
+    </div> -->
+    <?php 
+    //include './Modal/error-display.php';
     include './Modal/crud.php';
 
     $credentials = array(
