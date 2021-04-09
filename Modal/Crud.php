@@ -1,10 +1,10 @@
 <?php 
     class Crud 
     {
-        protected $host = 'localhost';
-        protected $dbase = 'phpcrud';
-        protected $username = 'root';
-        protected $pass = '';
+        protected $host;
+        protected $dbase;
+        protected $username;
+        protected $pass;
         protected $connect;
         
         //connect to database
@@ -19,6 +19,7 @@
             {
                 $this->connect = new mysqli($this->host, $this->username , 
                 $this->pass, $this->dbase);
+                echo 'connected!';
             }catch (Exception $e)
             {
                 echo 'Error'.$e->getMessage();
