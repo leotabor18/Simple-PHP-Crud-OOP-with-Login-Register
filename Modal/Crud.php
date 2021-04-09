@@ -25,6 +25,7 @@
                 echo 'Error'.$e->getMessage();
             }
             // return $this->connect;
+            echo 'nothing';
         }
         //create and store data to database
         public function _create($id)

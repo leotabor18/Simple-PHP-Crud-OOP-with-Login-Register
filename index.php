@@ -125,7 +125,8 @@
     $encoded = json_encode($credentials);
     
     $crud = new Crud();
-    $register = $crud->_connect($encoded);
+    echo $encoded; 
+    $crud->_connect($encoded);
     ?>
     <script src="./Javascript/index.js"></script>
 
