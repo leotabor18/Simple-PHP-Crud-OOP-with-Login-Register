@@ -12,10 +12,8 @@
 
      $encoded = json_encode($arr);
 
-     echo $encoded;
-
-    //  $crud = new LoginRegister();
-    //  $register = $crud->_register($encoded); 
+     $crud = new LoginRegister();
+     $register = $crud->_register($encoded); 
     //  echo $register;           
  }
 
