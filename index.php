@@ -114,8 +114,17 @@
     <?php include './Modal/error-display.php';
     include './Modal/crud.php';
 
+    $credentials = array(
+        'username' => "ukkyn2dznzmkrthe",
+        'password' => "EyGzX2ECAXg904cDhBNL",
+        'host' => "bpglhv6d8zls7rbm7myi-mysql.services.clever-cloud.com", 
+        'dbase' => "bpglhv6d8zls7rbm7myi",
+    );
+
+    $encoded = json_encode($credentials);
+    
     $crud = new Crud();
-    $crud->_connect();
+    $register = $crud->_connect($encoded);
     ?>
     <script src="./Javascript/index.js"></script>
 
