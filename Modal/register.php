@@ -12,8 +12,8 @@
 
      $encoded = json_encode($arr);
 
-     $crud = new LoginRegister();
-     $register = $crud->_register($encoded);
+    //  $crud = new LoginRegister();
+    //  $register = $crud->_register($encoded);
      if($register){
         echo "<script>console.log(".$register.")</script>";   
      } else {
