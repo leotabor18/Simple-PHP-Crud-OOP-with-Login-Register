@@ -1,6 +1,6 @@
 <?php 
 //register action page
- include './crud.php';
+ include './model/crud.php';
 
  if(isset($_POST['register'])){
 
@@ -11,9 +11,9 @@
      );
 
      $encoded = json_encode($arr);
-     echo $encoded;
-    //  $crud = new LoginRegister();
-    //  $register = $crud->_register($encoded);
+
+     $crud = new LoginRegister();
+     $register = $crud->_register($encoded);
     //  if($register){
     //     echo "<script>console.log(".$register.")</script>";   
     //  } else {

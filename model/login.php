@@ -1,6 +1,6 @@
 <?php 
 //login action page
-include './crud.php';
+include './model/crud.php';
 
 if(isset($_POST['login'])){
     $arr = array(

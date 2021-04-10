@@ -111,7 +111,7 @@
             </div>
         </div>
     </div>
-    <?php include './Modal/error-display.php';
+    <?php include './model/error-display.php';
     ?>
     <script src="./Javascript/index.js"></script>
 

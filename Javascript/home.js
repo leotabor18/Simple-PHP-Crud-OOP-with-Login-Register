@@ -69,7 +69,7 @@ for(let i = 0; i < btn_delete.length; i++){
   btn_delete[i].addEventListener('click', event =>{
   event.preventDefault();
   const form_delete = document.getElementById('form-delete');
-  form_delete.action = '/php crud/delete.php?id='+btn_delete[i].value;
+  form_delete.action = './model/delete.php?id='+btn_delete[i].value;
 });
 }
 

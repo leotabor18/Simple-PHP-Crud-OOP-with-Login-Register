@@ -1,6 +1,6 @@
 <?php 
 //delete action page
-include './crud.php';
+include './model/crud.php';
 
 if(isset($_GET['id'])){
     $id = $_GET['id'];
