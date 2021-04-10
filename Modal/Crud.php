@@ -121,12 +121,15 @@
                     SESSION_START();
                     $_SESSION['fullname'] = $fullname;
                     $_SESSION['username'] = $username;
-                    return header("Location: ./home.php/?id=".$user_id);
+                    return "success";
+                    // return header("Location: ./home.php/?id=".$user_id);
                 }else{
-                    return header("Location: ../index.php?error=password&name=$username");
+                    return "erorr1";
+                    // return header("Location: ../index.php?error=password&name=$username");
                 }
             }else {
-                return header("Location: ../index.php?error=invalid-user");
+                return "eror";
+                // return header("Location: ../index.php?error=invalid-user");
             }
 
         }

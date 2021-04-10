@@ -13,8 +13,8 @@
      $encoded = json_encode($arr);
 
      $crud = new LoginRegister();
-    //  $register = $crud->_register($encoded); 
-    //  echo $register;           
+     $register = $crud->_register($encoded); 
+     echo $register;           
  }
 
 
