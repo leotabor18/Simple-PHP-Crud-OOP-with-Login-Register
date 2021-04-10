@@ -15,9 +15,9 @@
      $crud = new LoginRegister();
      $register = $crud->_register($encoded);
      if($register){
-        echo $register;   
+        echo "<script>console.log(".$register.")</script>";   
      } else {
-        echo "error";   
+        echo "<script>console.log('error')</script>";   
      }
             
  }
