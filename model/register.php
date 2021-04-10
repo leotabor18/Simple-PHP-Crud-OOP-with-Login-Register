@@ -1,6 +1,7 @@
 <?php 
 //register action page
- include './model/crud.php';
+ include './crud.php'; 
+ $secret = include '../credentials.php';
 
  if(isset($_POST['register'])){
 
@@ -13,9 +14,10 @@
      $encoded = json_encode($arr);
 
      $crud = new LoginRegister();
-     $register = $crud->_register($encoded);
-    //  if($register){
-    //     echo "<script>console.log(".$register.")</script>";   
+     $crud->_register($encoded, $secret);
+     
+    //  if($secret){
+    //     echo "<script>console.log(".$secret.")</script>";   
     //  } else {
     //     echo "<script>console.log('error')</script>";   
     //  }

@@ -1,7 +1,7 @@
 <?php 
   session_start();
   if(!isset($_SESSION['fullname'])){
-    header("Location: ../index.php");
+    header("Location: ./index.php");
   }
 
 ?>
@@ -16,7 +16,7 @@
  
     <title>PHP CRUD</title>
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
-    <script src="../Javascript/jquery-3.6.0.js"></script> 
+    <script src="./Javascript/jquery-3.6.0.js"></script> 
   </head>
   <body>
   
@@ -43,7 +43,8 @@
               <h4>How's your day going?</h4>
             </div>
             <?php 
-                require 'Crud.php';
+                require './model/crud.php';
+                $secret = include './credentials.php';
                 $crud = new Crud();
                 ?>
             <form method="post" class="form-main border bg-gradient shadow-sm px-4 pt-2 pb-3 mb-2 bg-body rounded">
@@ -64,7 +65,7 @@
             <div id="parent">
               <?php 
               if(isset($_GET['id'])){
-                $data = $crud->_read($_GET['id']);
+                $data = $crud->_read($_GET['id'], $secret);
                 if($data > 0){
                   foreach($data as $row){?>
                       <div id="<?php echo $row['id']?>" class="bg-light bg-gradient shadow-sm mb-2 bg-body rounded">
@@ -88,11 +89,11 @@
                       }
                   }
                   if(isset($_GET['id'])){
-                    $crud->_create($_GET['id']);
+                    $crud->_create($_GET['id'], $secret);
                     if(isset($_POST['crud_update'])){
                       $id = $_POST['crud_update']; 
                       
-                      $query = $crud->_connect()->query("SELECT * FROM thoughts WHERE id='$id'");
+                      $query = $crud->_connect($secret)->query("SELECT * FROM thoughts WHERE id='$id'");
                       foreach($query as $row){
                         echo  "<script>
                           document.getElementById(".$id.").innerHTML = ".'"<form method=\"POST\" class=\"border bg-gradient shadow-sm px-4 pt-2 pb-3 mb-2 bg-body rounded\"><div class=\"mb-3\"><label for=\"name\" class=\"form-label\"></label><input type=\"text\" class=\"form-control\" id=\"name-input\" name=\"name\" value=\"'.$row['name'].'\"></div><div class=\"form-group\"><textarea class=\"form-control\" name=\"thoughts\" id=\"thoughts-input\" rows=\"3\">'.$row['data_input'].'</textarea></div><div class=\"d-flex justify-content-between align-items-center\"><small class=\"error\" id=\"error\"></small><div class=\"mt-2 d-flex justify-content-end\"><button class=\"btn btn-secondary me-1\" name=\"cancel\" >Cancel</button><button class=\"btn btn-primary\" id=\"btn-update\" name=\"update\" value=\"'.$id.'\" >Save</button></div></div></form>"'."
@@ -101,7 +102,7 @@
                     
                     } 
                     if(isset($_POST['update'])){
-                      $crud->_update($_POST['update']); 
+                      $crud->_update($_POST['update'], $secret); 
                     }
                   }
                                   

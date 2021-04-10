@@ -1,4 +1,5 @@
 <?php 
+
     class Crud 
     {
         protected $host;
@@ -19,7 +20,6 @@
             {
                 $this->connect = new mysqli($this->host, $this->username , 
                 $this->pass, $this->dbase);
-                echo 'connected!';
             }catch (Exception $e)
             {
                 echo 'Error'.$e->getMessage();
@@ -27,14 +27,14 @@
             return $this->connect;
         }
         //create and store data to database
-        public function _create($id)
+        public function _create($id, $secret)
         {
             if(isset($_POST['submit']))
             {
                 $name = $_POST['name'];
                 $thoughts = $_POST['thoughts'];
                 
-                $sql = $this->connect->prepare("INSERT INTO thoughts (name, data_input, user_id) VALUES (?,?,?)");
+                $sql = self::_connect($secret)->prepare("INSERT INTO thoughts (name, data_input, user_id) VALUES (?,?,?)");
                 $sql->bind_param('sss', $name, $thoughts, $id);
                 if($sql->execute())
                 {
@@ -48,10 +48,10 @@
             }
         }
         //read data from the database
-        public function _read($id)
+        public function _read($id, $secret)
         {
             $query = "SELECT * FROM thoughts WHERE user_id = '$id' ORDER BY id DESC";
-            $sql = self::_connect()->query($query);
+            $sql = self::_connect($secret)->query($query);
             if($sql->num_rows > 0)
             {
                 try
@@ -68,14 +68,14 @@
             }
         }
         //update data the return reload parent div
-        public function _update($id)
+        public function _update($id, $secret)
         {
            if(isset($_POST['update']))
            {
                 $name = $_POST['name'];
                 $thoughts = $_POST['thoughts'];
                
-                $sql = self::_connect()->prepare("UPDATE thoughts SET name=?, data_input=?, date=current_timestamp WHERE id=?");
+                $sql = self::_connect($secret)->prepare("UPDATE thoughts SET name=?, data_input=?, date=current_timestamp WHERE id=?");
                 $sql->bind_param('sss', $name, $thoughts, $id);
                 
                 if($sql->execute())
@@ -88,9 +88,9 @@
            }
         }
         //delete data then return reload parent div
-        public function _delete($id, $user_id)
+        public function _delete($id, $user_id, $secret)
         {
-            self::_connect();
+            self::_connect($secret);
             $sql = $this->connect->query("DELETE FROM thoughts WHERE id='$id'");
             if($sql)
             {
@@ -104,12 +104,12 @@
     //class for login and register, extend crud class to use connect function
     class LoginRegister extends Crud
     {
-        public function _login($login_data){
+        public function _login($login_data, $secret){
             $decoded = json_decode($login_data);
             $username = $decoded->{'username'};
             $password = $decoded->{'password'};
 
-            $stmt = parent::_connect()->prepare("SELECT user_id, fullname, username, password FROM users WHERE username=?");
+            $stmt = parent::_connect($secret)->prepare("SELECT user_id, fullname, username, password FROM users WHERE username=?");
             $stmt->bind_param('s', $username);
             $stmt->execute();
             $stmt->store_result();
@@ -121,7 +121,7 @@
                     SESSION_START();
                     $_SESSION['fullname'] = $fullname;
                     $_SESSION['username'] = $username;
-                    return header("Location: ./home.php/?id=".$user_id);
+                    return header("Location: ../home.php/?id=".$user_id);
                 }else{
                     return header("Location: ../index.php?error=password&name=$username");
                 }
@@ -131,28 +131,26 @@
 
         }
         //register user account
-        public function _register($register_data){
+        public function _register($register_data, $secret){
             $decoded = json_decode($register_data);
             $fullname = $decoded->{'fullname'};
             $username = $decoded->{'username'};
             $password = password_hash($decoded->{'password'}, PASSWORD_BCRYPT);
 
-            $stmt = parent::_connect()->prepare("SELECT username FROM users WHERE username=?");
+            $stmt = parent::_connect($secret)->prepare("SELECT username FROM users WHERE username=?");
             $stmt->bind_param('s', $username);
             $stmt->execute();
             $stmt->store_result();
             $stmt->bind_result($db_username); 
             $stmt->fetch();
             if($stmt->num_rows == 1){
-                return "error";
-                // return header("Location: ../index.php?error=username&name=$fullname");
+                return header("Location: ../index.php?error=username&name=$fullname");
             }else{
-                $sql = parent::_connect()->prepare("INSERT INTO users (user_id, fullname, username, password) VALUES (?, ?, ?, ?)");
+                $sql = parent::_connect($secret)->prepare("INSERT INTO users (user_id, fullname, username, password) VALUES (?, ?, ?, ?)");
                 $sql->bind_param('ssss', uniqid('', true), $fullname, $username, $password);
                 if($sql->execute())
                 {
-                    return "success";
-                    // return header('Location: ../index.php?success=true'); 
+                    return header('Location: ../index.php?success=true'); 
                 }else 
                 {
                     return $this->connect->error;

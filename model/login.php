@@ -1,6 +1,7 @@
 <?php 
 //login action page
-include './model/crud.php';
+include './crud.php'; 
+$secret = include '../credentials.php';
 
 if(isset($_POST['login'])){
     $arr = array(
@@ -10,7 +11,7 @@ if(isset($_POST['login'])){
     $encoded = json_encode($arr);
 
     $crud = new LoginRegister();
-    $login = $crud->_login($encoded);  
+    $crud->_login($encoded, $secret);  
 }
 
 ?>
