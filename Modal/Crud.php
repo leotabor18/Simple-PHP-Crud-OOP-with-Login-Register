@@ -121,15 +121,12 @@
                     SESSION_START();
                     $_SESSION['fullname'] = $fullname;
                     $_SESSION['username'] = $username;
-                    return "success";
-                    // return header("Location: ./home.php/?id=".$user_id);
+                    return header("Location: ./home.php/?id=".$user_id);
                 }else{
-                    return "erorr1";
-                    // return header("Location: ../index.php?error=password&name=$username");
+                    return header("Location: ../index.php?error=password&name=$username");
                 }
             }else {
-                return "eror";
-                // return header("Location: ../index.php?error=invalid-user");
+                return header("Location: ../index.php?error=invalid-user");
             }
 
         }
@@ -147,13 +144,15 @@
             $stmt->bind_result($db_username); 
             $stmt->fetch();
             if($stmt->num_rows == 1){
-                return header("Location: ../index.php?error=username&name=$fullname");
+                return "error";
+                // return header("Location: ../index.php?error=username&name=$fullname");
             }else{
                 $sql = parent::_connect()->prepare("INSERT INTO users (user_id, fullname, username, password) VALUES (?, ?, ?, ?)");
                 $sql->bind_param('ssss', uniqid('', true), $fullname, $username, $password);
                 if($sql->execute())
                 {
-                    return header('Location: ../index.php?success=true'); 
+                    return "success";
+                    // return header('Location: ../index.php?success=true'); 
                 }else 
                 {
                     return $this->connect->error;
